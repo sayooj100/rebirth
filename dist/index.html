@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebirth – Kids AI Mentor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+  <script type="module" crossorigin src="/rebirth/assets/index-Bce94U4N.js"></script>
+  <link rel="stylesheet" crossorigin href="/rebirth/assets/index-D8ROmYfr.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="main-content" class="content-wrapper">
+            <header>
+                <h1 class="brand-title">Rebirth</h1>
+            </header>
+
+            <main class="container">
+                <div id="story-box" class="card dialog-box">
+                    <p id="story-text" class="fade-in">Hey dude, how was the day? Click anywhere to start!</p>
+                </div>
+
+                <div id="avatar-container" class="avatar-wrapper">
+                    <img src="/rebirth/assets/pinterest-pin-1771429674779-removebg-preview-W0TsBLgB.png" alt="Rebirth Avatar" id="avatar"
+                        class="floating">
+                </div>
+
+                <div id="interaction-area">
+                    <div id="welcome-action" class="hidden">
+                        <button id="ready-btn" class="primary-btn large-btn">I am ready!</button>
+                    </div>
+
+                    <div id="emotion-buttons" class="emotion-container hidden">
+                        <p class="emotion-prompt">How do you feel after hearing that story?</p>
+                        <div class="emotion-grid">
+                            <button class="emotion-btn" data-emotion="happy">
+                                <span class="emoji">😊</span>
+                                <span class="label">Happy</span>
+                            </button>
+                            <button class="emotion-btn" data-emotion="sad">
+                                <span class="emoji">😢</span>
+                                <span class="label">Sad</span>
+                            </button>
+                            <button class="emotion-btn" data-emotion="angry">
+                                <span class="emoji">😡</span>
+                                <span class="label">Angry</span>
+                            </button>
+                            <button class="emotion-btn" data-emotion="confused">
+                                <span class="emoji">😕</span>
+                                <span class="label">Confused</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="task-card" class="card task-display hidden">
+                        <h3>Today's Mission</h3>
+                        <p id="task-text"></p>
+                        <button id="complete-btn" class="primary-btn success-btn">I've Completed the Task! 🌟</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="reward-overlay" class="overlay hidden">
+            <div class="reward-modal">
+                <div class="glow-effect"></div>
+                <img src="/rebirth/assets/9ca5fd30-b3b8-46c2-b6dc-6129fd2c951a-removebg-preview-BgLi-E84.png" alt="Reward" id="reward-img">
+                <p id="reward-msg">Nice! You earned this reward today! 🌟</p>
+                <p class="dismiss-hint">Tap anywhere to continue</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
