@@ -351,7 +351,7 @@ header {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .fade-in {
@@ -392,4 +392,112 @@ header {
   #avatar {
     width: 240px;
   }
+}
+
+/* Anger Capsule Button */
+.capsule-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: 2px solid var(--angry-color);
+  border-radius: 50px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 3000;
+  box-shadow: 0 4px 15px rgba(255, 118, 117, 0.2);
+  transition: all 0.3s ease;
+  font-family: var(--font-round);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--angry-color);
+}
+
+.capsule-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 118, 117, 0.3);
+  background: var(--angry-color);
+  color: white;
+}
+
+.capsule-btn .emoji {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .capsule-btn {
+    top: 15px;
+    right: 15px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Breathing Exercise Styles */
+.breathing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: -60px;
+  /* Pull it up closer to the avatar */
+  animation: fadeIn 0.5s ease-out;
+}
+
+.balloon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 100%;
+}
+
+.balloon {
+  width: 80px;
+  height: 100px;
+  background: var(--accent-color);
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  position: relative;
+  box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1),
+    0 10px 30px rgba(250, 177, 160, 0.3);
+  transition: transform 3s ease-in-out;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid var(--accent-color);
+}
+
+.balloon-inhale {
+  transform: scale(2.2);
+}
+
+.balloon-exhale {
+  transform: scale(1);
+}
+
+.breathing-instruction {
+  font-family: var(--font-round);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#feel-better-btn {
+  animation: slideUp 0.5s ease-out;
+  margin-top: 5px;
 }

@@ -13,6 +13,11 @@
 </head>
 
 <body>
+    <audio id="bg-music" src="/music.mp3" loop></audio>
+    <button id="anger-capsule-btn" class="capsule-btn">
+        <span class="emoji">😡</span>
+        <span class="label">i feel anger</span>
+    </button>
     <div id="app">
         <div id="main-content" class="content-wrapper">
             <header>
@@ -60,6 +65,16 @@
                         <h3>Today's Mission</h3>
                         <p id="task-text"></p>
                         <button id="complete-btn" class="primary-btn success-btn">I've Completed the Task! 🌟</button>
+                    </div>
+
+                    <!-- Breathing Exercise Section -->
+                    <div id="breathing-exercise" class="breathing-container hidden">
+                        <div class="balloon-wrapper">
+                            <div class="balloon" id="breathing-balloon"></div>
+                        </div>
+                        <div class="breathing-instruction" id="breathing-instruction">Breathe in...</div>
+                        <button id="feel-better-btn" class="primary-btn success-btn hidden">I feel better now!
+                            🌟</button>
                     </div>
                 </div>
             </main>

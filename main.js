@@ -137,6 +137,19 @@ function init() {
     const rewardOverlay = document.getElementById('reward-overlay');
     const completeBtn = document.getElementById('complete-btn');
     const rewardMsg = document.getElementById('reward-msg');
+    const bgMusic = document.getElementById('bg-music');
+    const angerBtn = document.getElementById('anger-capsule-btn');
+    const breathingContainer = document.getElementById('breathing-exercise');
+    const balloon = document.getElementById('breathing-balloon');
+    const breathingInstruction = document.getElementById('breathing-instruction');
+    const feelBetterBtn = document.getElementById('feel-better-btn');
+
+    let previousUIState = null;
+
+    // Set music volume
+    if (bgMusic) {
+        bgMusic.volume = 0.15; // Set to a smaller volume as requested
+    }
 
     // Reset UI
     function resetUI() {
@@ -144,10 +157,81 @@ function init() {
         emotionContainer.classList.add('hidden');
         taskCard.classList.add('hidden');
         rewardOverlay.classList.add('hidden');
+        breathingContainer.classList.add('hidden');
         mainContent.classList.remove('blurred');
         completeBtn.disabled = false;
         completeBtn.classList.remove('hidden');
     }
+
+    async function startBreathingExercise() {
+        // Save state
+        previousUIState = {
+            stage,
+            welcomeHidden: welcomeAction.classList.contains('hidden'),
+            emotionHidden: emotionContainer.classList.contains('hidden'),
+            taskCardHidden: taskCard.classList.contains('hidden'),
+            storyText: storyText.textContent
+        };
+
+        // Hide current UI
+        welcomeAction.classList.add('hidden');
+        emotionContainer.classList.add('hidden');
+        taskCard.classList.add('hidden');
+        feelBetterBtn.classList.add('hidden');
+        breathingContainer.classList.remove('hidden');
+
+        const introMsg = "Let's do a breathing exercise together.";
+        storyText.textContent = introMsg;
+        await speak(introMsg);
+
+        // Breathing cycles
+        let cycles = 0;
+        const totalCycles = 3;
+
+        async function breathe() {
+            if (cycles >= totalCycles) {
+                breathingInstruction.textContent = "Great job!";
+                feelBetterBtn.classList.remove('hidden');
+                speak("You did great! How do you feel now?");
+                return;
+            }
+
+            // Inhale
+            breathingInstruction.textContent = "Breathe in...";
+            balloon.className = 'balloon balloon-inhale';
+            await new Promise(r => setTimeout(r, 3000));
+
+            // Exhale
+            breathingInstruction.textContent = "Breathe out...";
+            balloon.className = 'balloon balloon-exhale';
+            await new Promise(r => setTimeout(r, 3000));
+
+            cycles++;
+            breathe();
+        }
+
+        breathe();
+    }
+
+    feelBetterBtn.addEventListener('click', () => {
+        breathingContainer.classList.add('hidden');
+
+        // Restore state
+        if (previousUIState) {
+            stage = previousUIState.stage;
+            if (!previousUIState.welcomeHidden) welcomeAction.classList.remove('hidden');
+            if (!previousUIState.emotionHidden) emotionContainer.classList.remove('hidden');
+            if (!previousUIState.taskCardHidden) taskCard.classList.remove('hidden');
+            storyText.textContent = previousUIState.storyText;
+        }
+
+        speak("I'm glad you feel better! Let's continue.");
+    });
+
+    // Handle anger button click
+    angerBtn.addEventListener('click', () => {
+        startBreathingExercise();
+    });
 
     // Pick a random story
     function loadRandomStory() {
@@ -172,6 +256,11 @@ function init() {
         if (stage === 0) {
             stage = 1;
             document.removeEventListener('click', handleGlobalClick);
+
+            // Play music on first interaction
+            if (bgMusic && bgMusic.paused) {
+                bgMusic.play().catch(e => console.warn('Music playback failed:', e));
+            }
 
             const msg = "Are you ready for a small story?";
             storyText.textContent = msg;
@@ -256,6 +345,10 @@ function init() {
 
     document.addEventListener('click', () => {
         if (stage === 0) {
+            // Play music on first interaction
+            if (bgMusic) {
+                bgMusic.play().catch(e => console.warn('Music playback failed:', e));
+            }
             speak(storyText.textContent);
             handleGlobalClick();
         }
